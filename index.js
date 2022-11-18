@@ -8,10 +8,11 @@ exports.handler = skillBuilder
   )
   .lambda();
 
-if (request.directive.header.namespace === 'Alexa.Authorization' && request.directive.header.name === 'AcceptGrant') {
-    console.log("DEBUG:", "Authorization request",  JSON.stringify(request));
-    handleAcceptGrant(request, context);
-}
+exports.handler = function (request, context) {
+  if (request.directive.header.namespace === 'Alexa.Authorization' && request.directive.header.name === 'AcceptGrant') {
+      console.log("DEBUG:", "Authorization request",  JSON.stringify(request));
+      handleAcceptGrant(request, context);
+  }
 
 function handleAcceptGrant(request, context) {
     var response = {
@@ -28,4 +29,4 @@ function handleAcceptGrant(request, context) {
     console.log("DEBUG", "Alexa.Authorization ", JSON.stringify(response));
     //context.succeed(response);
     return response;
-}
+}}

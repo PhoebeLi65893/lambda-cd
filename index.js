@@ -1,12 +1,12 @@
 //const Alexa = require(`ask-sdk-core`);
-const skillBuilder = Alexa.SkillBuilders.custom();
+//const skillBuilder = Alexa.SkillBuilders.custom();
 //const skillEventHandler = require('./src/handlers/skillEventHandler');
 
-exports.handler = skillBuilder
-  .addRequestHandlers(
-    //skillEventHandler
-  )
-  .lambda();
+//exports.handler = skillBuilder
+ // .addRequestHandlers(
+//    skillEventHandler
+//  )
+ // .lambda();
 
 exports.handler = function (request, context) {
   if (request.directive.header.namespace === 'Alexa.Authorization' && request.directive.header.name === 'AcceptGrant') {

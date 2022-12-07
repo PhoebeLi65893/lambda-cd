@@ -12,11 +12,15 @@ jobs:
     steps:
       - name: checkout source code
         uses: actions/checkout@v1
-      - name: deploy index.js
+        
+      - name: Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*'
+        
+      - name: deploy
         uses: appleboy/lambda-action@master
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: lambda-cd
-          source: index.js
+          deployment_package: deploy.zip

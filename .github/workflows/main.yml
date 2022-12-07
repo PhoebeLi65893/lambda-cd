@@ -24,4 +24,4 @@ jobs:
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: lambda-cd
           deployment_package: deploy.zip
-          source: deploy.zip
+          # source: deploy.zip

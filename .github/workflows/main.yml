@@ -31,4 +31,4 @@ jobs:
             || aws s3 mb s3://phoebedev1
 
           # Run SAM Deploy
-          sam deploy --template-file phoebedev.yaml --stack-name phoebedev --s3-bucket phoebedev --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
+          #sam deploy --template-file phoebedev.yaml --stack-name phoebedev --s3-bucket phoebedev --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM

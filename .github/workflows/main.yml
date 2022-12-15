@@ -16,13 +16,19 @@ jobs:
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
         
-      - name: deploy
-        uses: appleboy/lambda-action@master
+      - name: Configure AWS credentials
+        id: creds
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: ${{ secrets.AWS_REGION }}
-          function_name: lambda-cd
-          #deployment_package: deploy.zip
-          zip_file: deploy.zip
-          #source: deploy.zip
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: 'us-west-2'
+          
+      - name: Deploy
+        run: |
+          # Create S3 Bucket to store code
+          aws s3api head-bucket --bucket "phoebedev" 2>/dev/null \
+            || aws s3 mb s3://phoebedev
+
+          # Run SAM Deploy
+          sam deploy --template-file phoebedev.yaml --stack-name phoebedev --s3-bucket phoebedev --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM

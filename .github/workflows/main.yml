@@ -27,8 +27,8 @@ jobs:
       - name: Deploy
         run: |
           # Create S3 Bucket to store code
-          aws s3api head-bucket --bucket "phoebedev" 2>/dev/null \
-            || aws s3 mb s3://phoebedev
+          aws s3api head-bucket --bucket "phoebedev1" 2>/dev/null \
+            || aws s3 mb s3://phoebedev1
 
           # Run SAM Deploy
           sam deploy --template-file phoebedev.yaml --stack-name phoebedev --s3-bucket phoebedev --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
